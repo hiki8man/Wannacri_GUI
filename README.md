@@ -1,0 +1,2 @@
+用于转换USM的GUI工具，基于Wannacri库与QT库
+这个GUI需要使用ffmpeg5.0以上的版本才可以正常使用

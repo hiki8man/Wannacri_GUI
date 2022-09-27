@@ -72,7 +72,6 @@ class MyGui(QMainWindow,Ui_Main_windows):
         input_path = self.lineEdit.text()
         if input_path != "":
             #get file info
-            
             #old
             #file_info = os.popen(str(self.ffprobe_path) + " -loglevel " + "quiet " + str(input_path) + " -show_streams " + "-of " + "json")
             common_list = [str(self.ffprobe_path),"-loglevel","quiet",str(input_path),"-show_streams","-of","json"]

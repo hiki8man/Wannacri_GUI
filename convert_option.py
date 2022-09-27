@@ -7,6 +7,7 @@ class convert_option():
     MyGUi = ""
     def __init__(self,MyUi):
         self.MyGUi = MyUi
+    
     def run(self):
         print(len(argv))
         if len(argv) > 1:
@@ -17,6 +18,7 @@ class convert_option():
                 self.volume(argv)
                 self.CRF(argv)
                 self.brightness(argv)
+    
     def is_number(self,s):    
         try:    
             float(s)        

@@ -160,6 +160,7 @@ class MyGui(QMainWindow,Ui_Main_windows):
                     self.radioButton_4.setChecked(True)
     
     def GUI_exit(self):
+        #kill ffmpeg, i don't know how to fix
         try:
             os.system("taskkill /f /im ffmpeg.exe")
             os.system("taskkill /f /im ffmpeg.exe")

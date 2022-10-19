@@ -72,6 +72,7 @@ class MyGui(QMainWindow,Ui_Main_windows):
         input_path = self.lineEdit.text()
         if input_path != "":
             #get file info
+            
             #old
             #file_info = os.popen(str(self.ffprobe_path) + " -loglevel " + "quiet " + str(input_path) + " -show_streams " + "-of " + "json")
             common_list = [str(self.ffprobe_path),"-loglevel","quiet",str(input_path),"-show_streams","-of","json"]
@@ -160,7 +161,6 @@ class MyGui(QMainWindow,Ui_Main_windows):
                     self.radioButton_4.setChecked(True)
     
     def GUI_exit(self):
-        #kill ffmpeg, i don't know how to fix
         try:
             os.system("taskkill /f /im ffmpeg.exe")
             os.system("taskkill /f /im ffmpeg.exe")
@@ -168,6 +168,10 @@ class MyGui(QMainWindow,Ui_Main_windows):
         except:
             exit(0)
     
+    def closeEvent(self,event):
+        event.ignore()
+        self.GUI_exit()
+        
     def convert_check(self):
         input_path = self.lineEdit.text()
         output_path = self.lineEdit_2.text()

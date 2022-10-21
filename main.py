@@ -61,12 +61,23 @@ class MyGui(QMainWindow,Ui_Main_windows):
         else:
             self.label_9.setStyleSheet("color:#FF0000")
             self.label_9.setText(self._translate("Main_windows", "Miss FFmpeg.exe!"))
+            self.toolButton.setEnabled(False)
+            self.toolButton_2.setEnabled(False)
+            self.pushButton_2.setEnabled(False)
     
     def input_file(self):
         input_file_name = QFileDialog.getOpenFileName(self, 'select file......')
         print(input_file_name[0])
         self.lineEdit.setText(input_file_name[0])
-        self.check_movie_encode()
+        try:
+            Path(input_file_name[0]).stem.encode("shift-jis")
+        except:
+            QMessageBox.warning(self,"Warning","Wannacri use shift-jis encode by default\nPlease rename your file name and try again",QMessageBox.Yes)
+            self.radioButton_4.setEnabled(False)
+            self.radioButton_5.setEnabled(False)
+            self.pushButton_2.setEnabled(False)
+        else:
+            self.check_movie_encode()
 
     def check_movie_encode(self):
         input_path = self.lineEdit.text()

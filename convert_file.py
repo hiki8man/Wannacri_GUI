@@ -155,7 +155,7 @@ class convert_video():
                 time_now = self.time_convert(time[convert_time_str_start:convert_time_str_end])
                 convert_process = (time_now / time_all) * 100
                 #print(convert_process)
-                self.Myui.progressBar.setValue(convert_process)
+                self.Myui.progressBar.setValue(int(convert_process))
                 #sleep(0.1)
     
     def convert_run_h264(self):

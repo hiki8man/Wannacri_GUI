@@ -18,6 +18,13 @@ from wannacri_gui import Ui_Main_windows
 from convert_option import convert_option
 from convert_file import convert_video
 from subprocess import Popen ,PIPE , STDOUT
+from multiprocessing import current_process
+
+def kill(proc_pid):
+    process = psutil.Process(proc_pid)
+    for proc in process.children(recursive=True):
+        proc.kill()
+    process.kill()
 
 class MyGui(QMainWindow,Ui_Main_windows):
 
@@ -172,12 +179,9 @@ class MyGui(QMainWindow,Ui_Main_windows):
                     self.radioButton_4.setChecked(True)
     
     def GUI_exit(self):
-        try:
-            os.system("taskkill /f /im ffmpeg.exe")
-            os.system("taskkill /f /im ffmpeg.exe")
-            exit(0)
-        except:
-            exit(0)
+        process = current_process()
+        pid = process.pid
+        kill(pid)
     
     def closeEvent(self,event):
         event.ignore()

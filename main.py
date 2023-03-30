@@ -18,6 +18,7 @@ from wannacri_gui import Ui_Main_windows
 from convert_option import convert_option
 from convert_file import convert_video
 from subprocess import Popen ,PIPE , STDOUT
+import psutil
 from multiprocessing import current_process
 
 def kill(proc_pid):
@@ -213,5 +214,5 @@ start_convert = option_val.outpath(argv)
 if start_convert:
     print("convert......")
     convert_video(MyUi).run()
-    exit(0)
+    MyUi.GUI_exit()
 exit(app.exec_())

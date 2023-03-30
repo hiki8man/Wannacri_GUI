@@ -31,6 +31,12 @@ class convert_video():
         self.output_name = str(Path.joinpath(Path(self.output_path),Path(self.file_name)))
     
     def run(self):
+        self.Myui.radioButton_4.setEnabled(False)
+        self.Myui.radioButton_5.setEnabled(False)
+        self.Myui.pushButton_2.setEnabled(False)
+        self.Myui.spinBox.setEnabled(False)
+        self.Myui.doubleSpinBox.setEnabled(False)
+        self.Myui.doubleSpinBox_2.setEnabled(False)
         #Reset label color
         self.Myui.label_9.setStyleSheet("color:#000000")
         #if crf can't setting, this file is audio or usm
@@ -66,6 +72,12 @@ class convert_video():
         self.Myui.label_9.setStyleSheet("color:#008800")
         self.Myui.label_9.setText(self._translate("Main_windows", "Complete！"))
         self.Myui.progressBar.setValue(100)
+        self.Myui.radioButton_4.setEnabled(True)
+        self.Myui.radioButton_5.setEnabled(True)
+        self.Myui.pushButton_2.setEnabled(True)
+        self.Myui.spinBox.setEnabled(True)
+        self.Myui.doubleSpinBox.setEnabled(True)
+        self.Myui.doubleSpinBox_2.setEnabled(True)
         #Nuitka use
         os.chdir(sys.path[0])
         #Pyinstaller use
@@ -122,6 +134,7 @@ class convert_video():
         else:
             ffmpeg_output = ["-c:v","vp9",
                             "-crf",crf_val,
+                            "-b:v","6666k",
                             "-y",
                             self.output_path]
         self.ffmpeg_cmd = ffmpeg_main + ffmpeg_input + ffmpeg_output

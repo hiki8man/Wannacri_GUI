@@ -31,14 +31,9 @@ class convert_video():
         self.output_name = str(Path.joinpath(Path(self.output_path),Path(self.file_name)))
     
     def run(self):
-        self.Myui.radioButton_4.setEnabled(False)
-        self.Myui.radioButton_5.setEnabled(False)
-        self.Myui.pushButton_2.setEnabled(False)
-        self.Myui.spinBox.setEnabled(False)
-        self.Myui.doubleSpinBox.setEnabled(False)
-        self.Myui.doubleSpinBox_2.setEnabled(False)
         #Reset label color
         self.Myui.label_9.setStyleSheet("color:#000000")
+        self.Myui.pushButton_2.setEnabled(False)
         #if crf can't setting, this file is audio or usm
         if Path(self.Myui.lineEdit.text()).suffix == ".usm":
             self.extractusm(self.file_path)
@@ -51,11 +46,15 @@ class convert_video():
             if self.Myui.radioButton_5.isChecked():
                 self.Myui.label_9.setText(self._translate("Main_windows", "Convert H264......"))
                 self.H264_video()
+                self.Myui.radioButton_4.setEnabled(False)
+                self.Myui.radioButton_5.setEnabled(False)
                 self.convert_run()
             #convert vp9
             elif self.Myui.radioButton_4.isChecked():
                 self.Myui.label_9.setText(self._translate("Main_windows", "Convert VP9......"))
                 self.VP9_video()
+                self.Myui.radioButton_4.setEnabled(False)
+                self.Myui.radioButton_5.setEnabled(False)
                 self.convert_run()
             #if uesr can setting vol,this file have audio
             if self.Myui.doubleSpinBox.isEnabled():
@@ -75,9 +74,6 @@ class convert_video():
         self.Myui.radioButton_4.setEnabled(True)
         self.Myui.radioButton_5.setEnabled(True)
         self.Myui.pushButton_2.setEnabled(True)
-        self.Myui.spinBox.setEnabled(True)
-        self.Myui.doubleSpinBox.setEnabled(True)
-        self.Myui.doubleSpinBox_2.setEnabled(True)
         #Nuitka use
         os.chdir(sys.path[0])
         #Pyinstaller use

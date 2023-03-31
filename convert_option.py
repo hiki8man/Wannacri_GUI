@@ -2,7 +2,7 @@
 
 from sys import argv , exit
 from pathlib import Path
-from PyQt5.QtWidgets import QMainWindow
+from PySide6.QtWidgets import QMainWindow
 class convert_option():
     MyGUi = ""
     def __init__(self,MyUi):

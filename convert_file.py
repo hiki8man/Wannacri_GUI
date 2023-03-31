@@ -1,7 +1,7 @@
 from pathlib import Path
 from subprocess import Popen ,PIPE , STDOUT ,call
-from PyQt5.QtWidgets import QApplication
-from PyQt5.QtCore import QCoreApplication
+from PySide6.QtWidgets import QApplication
+from PySide6.QtCore import QCoreApplication
 from time import sleep
 import wannacri
 import pythonjsonlogger

@@ -44,6 +44,7 @@ class MyGui(QMainWindow,Ui_Main_windows):
     ffprobe_path = Path.joinpath(Path.cwd(),"ffmpeg/ffprobe.exe")
     song_bit = 120000
     file_codec = ""
+    file_pixfmt = ""
 
     def __init__(self):
         super().__init__()
@@ -123,6 +124,7 @@ class MyGui(QMainWindow,Ui_Main_windows):
                 if get_info["streams"][0]["codec_type"] == "video":
                     self.radioButton_4.setEnabled(True)
                     self.radioButton_5.setEnabled(True)
+                    self.file_pixfmt = get_info["streams"][0]["pix_fmt"]
                     #get audio bit
                     try:
                         audio_bit_val = int(get_info["streams"][1]["bit_rate"])
@@ -242,7 +244,8 @@ class MyGui(QMainWindow,Ui_Main_windows):
                      #sound option
                      "song_bit":self.song_bit,
                      "volume":self.doubleSpinBox.value(),
-                     "file_codec":self.file_codec
+                     "file_codec":self.file_codec,
+                     "pix_fmt":self.file_pixfmt
                      }
 
             self.disable_option()

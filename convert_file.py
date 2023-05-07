@@ -94,14 +94,16 @@ class convert_video():
             bright_val = str(bright_val / 100)
             ffmpeg_input = ffmpeg_input + ["-vf","curves=all='0/0 1/" + bright_val + "'"]
         #use self.h264_encode to change file encode
-        if self.get_option["file_codec"].lower() == "h264"  and bright_val == 100:
-            self.h264_encode = "copy"
+        if self.get_option["file_codec"].lower() == "h264"  and bright_val == 100 and self.get_option["pix_fmt"].lower() == "yuv420p":
+            ffmpeg_output = ["-c:v","copy",
+                            "-y",
+                            self.output_path]
         else:
-            self.h264_encode = "libx264"
-        ffmpeg_output = ["-c:v",self.h264_encode,
-                        "-crf",crf_val,
-                        "-y",
-                        self.output_path]
+            ffmpeg_output = ["-c:v","libx264",
+                            "-crf",crf_val,
+                            "-pix_fmt","yuv420p",
+                            "-y",
+                            self.output_path]
         self.ffmpeg_cmd = ffmpeg_main + ffmpeg_input + ffmpeg_output
     
     def VP9_video(self):
@@ -113,9 +115,8 @@ class convert_video():
         if bright_val != 100:
             bright_val = str(bright_val / 100)
             ffmpeg_input = ffmpeg_input + ["-vf","curves=all='0/0 1/" + bright_val + "'"]
-        if self.get_option["file_codec"].lower() == "vp9" and bright_val == 100:
+        if self.get_option["file_codec"].lower() == "vp9" and bright_val == 100 and self.get_option["pix_fmt"].lower() == "yuv420p":
             ffmpeg_output = ["-c:v","copy",
-                                "-crf",crf_val,
                                 "-y",
                                 self.output_path]
         else:
@@ -123,6 +124,8 @@ class convert_video():
                             "-crf",crf_val,
                             "-b:v","5000k",
                             "-minrate","2500k","-maxrate","7500k",
+                            "-threads",self.get_cpu_threads,
+                            "-pix_fmt","yuv420p",
                             "-y",
                             self.output_path]
         self.ffmpeg_cmd = ffmpeg_main + ffmpeg_input + ffmpeg_output

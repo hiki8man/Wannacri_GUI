@@ -2,7 +2,7 @@ from pathlib import Path
 from subprocess import Popen ,PIPE , STDOUT ,call
 from PySide6.QtWidgets import QApplication
 from PySide6.QtCore import QCoreApplication
-from time import sleep
+from multiprocessing import cpu_count
 import wannacri
 import pythonjsonlogger
 import sys
@@ -24,6 +24,7 @@ class convert_video():
     get_option = ""
     set_message = ""
     set_progress = ""
+    get_cpu_threads = str(cpu_count())
 
     def __init__(self,option,progress,message):
         self.get_option = option

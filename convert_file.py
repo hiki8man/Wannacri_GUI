@@ -76,6 +76,8 @@ class convert_video():
         ffmpeg_input = [self.file_path,"-vn"]
         vol_val = self.get_option["volume"]
         bit_val = str(self.get_option["song_bit"])
+        if int(bit_val) >= 500000:
+            bit_val = "500000"
         if vol_val < 100:
             vol_val = vol_val / 100
             ffmpeg_input = ffmpeg_input + ["-af","volume="+str(vol_val)]
